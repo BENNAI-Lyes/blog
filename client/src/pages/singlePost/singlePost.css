@@ -1,0 +1,68 @@
+.singlePostFeed {
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+}
+
+.singlePostContent {
+  flex: 9;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.singlePostImg {
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.singlePostTitleContainer,
+.singlePostInfo {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.singlePostTitle {
+  font-family: "Josefin Sans", sans-serif;
+  color: #333;
+}
+
+.singlePostIcons {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+}
+.singlePostIcon:first-child {
+  color: teal;
+}
+.singlePostIcon:last-child {
+  color: tomato;
+}
+.singlePostInfoLeft {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(175, 154, 126);
+  font-family: "Josefin Sans", sans-serif;
+}
+.singlePostInfoRight {
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Josefin Sans", sans-serif;
+}
+.singlePostText {
+  font-family: "Varela Round", sans-serif;
+  line-height: 27px;
+}
+.singlePostText::first-letter {
+  font-family: "Lora", serif;
+  font-size: 30px;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 3px;
+}
