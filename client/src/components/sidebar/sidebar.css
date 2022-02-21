@@ -1,0 +1,59 @@
+.sidebar {
+  flex: 3;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebarItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebarItemTitle {
+  font-family: "Lora", serif;
+  color: #444;
+  font-weight: 500;
+  font-size: 19px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  width: 30%;
+}
+
+.sidebarImg {
+  height: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.sidebarDesc {
+  font-family: "Josefin Sans", sans-serif;
+  line-height: 1.6;
+}
+
+.sidebarCategoryList {
+  padding: 10px 0;
+}
+
+.sidebarCategoryItem {
+  width: 50%;
+  display: inline-block;
+  padding: 10px 0;
+  font-family: "Josefin Sans", sans-serif;
+  cursor: pointer;
+}
+
+.sidebarSocialList {
+  padding: 10px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.sidebarSocialIcon {
+  font-size: 22px;
+  cursor: pointer;
+  color: #555;
+}
