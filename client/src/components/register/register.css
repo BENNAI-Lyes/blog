@@ -1,0 +1,68 @@
+.registerWrapper {
+  width: 100%;
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  position: relative;
+  background: url("https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?cs=srgb&dl=pexels-tirachard-kumtanom-733857.jpg&fm=jpg");
+  background-size: cover;
+  font-family: "Lora", serif;
+  color: #111;
+}
+
+.registerTitle {
+  font-size: 60px;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: rgb(245, 226, 192);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.registerFormLabel {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.registerFormInput {
+  padding: 10px;
+  border: none;
+  border-bottom: 1ps solid #555;
+  width: 300px;
+}
+
+.registerFormInput:focus {
+  outline: none;
+}
+
+.registerSubmit {
+  color: #fff;
+  background-color: teal;
+  padding: 7px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 17px;
+}
+
+.registerLoginButton {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  color: #fff;
+  background-color: #333;
+  padding: 7px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 17px;
+}
