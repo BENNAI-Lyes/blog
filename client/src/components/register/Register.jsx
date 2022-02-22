@@ -1,5 +1,6 @@
 import "./register.css";
 import Topbar from "../topbar/Topbar";
+import { Link } from "react-router-dom";
 
 export default function register() {
   return (
@@ -24,7 +25,11 @@ export default function register() {
             register
           </button>
         </form>
-        <button className="registerLoginButton">Login</button>
+        <button className="registerLoginButton">
+          <Link className="link" to="/login">
+            login
+          </Link>
+        </button>
       </div>
     </div>
   );

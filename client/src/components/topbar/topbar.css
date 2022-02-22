@@ -50,5 +50,8 @@
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
-  margin-right: 15px;
+}
+
+.topbarSearch {
+  margin-left: 15px;
 }

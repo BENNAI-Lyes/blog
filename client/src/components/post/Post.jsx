@@ -1,13 +1,16 @@
 import "./post.css";
+import { Link } from "react-router-dom";
 
 export default function Post() {
   return (
     <div className="post">
-      <img
-        src="https://images.unsplash.com/photo-1501747315-124a0eaca060?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGxhbnQlMjBwb3N0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt=""
-        className="postImg"
-      />
+      <Link className="link" to="/post/jhjh">
+        <img
+          src="https://images.unsplash.com/photo-1501747315-124a0eaca060?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGxhbnQlMjBwb3N0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+          alt=""
+          className="postImg"
+        />
+      </Link>
       <div className="postCats">
         <span className="postCat">Music</span>
         <span className="postCat">Life</span>
