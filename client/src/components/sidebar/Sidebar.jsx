@@ -1,6 +1,21 @@
 import "./sidebar.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
+  const [category, setCategory] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
+  //fetch a all category
+  useEffect(() => {
+    const getCategory = async () => {
+      const res = await axios.get("/api/category");
+      setCategory(res.data);
+    };
+    getCategory();
+  }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebarItem">
@@ -18,12 +33,13 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <div className="sidebarItemTitle">Category</div>
         <ul className="sidebarCategoryList">
-          <li className="sidebarCategoryItem">Life</li>
-          <li className="sidebarCategoryItem">Style</li>
-          <li className="sidebarCategoryItem">Music</li>
-          <li className="sidebarCategoryItem">Tech</li>
-          <li className="sidebarCategoryItem">Cinema</li>
-          <li className="sidebarCategoryItem">Sport</li>
+          {category.map((cat) => (
+            <li key={cat._id} className="sidebarCategoryItem">
+              <Link to={`/?category=${cat.name}`} className="link postCat">
+                {cat.name}
+              </Link>
+            </li>
+          ))}
         </ul>
         <div className="sidebarItem">
           <div className="sidebarItemTitle">Follow Us</div>

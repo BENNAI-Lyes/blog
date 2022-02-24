@@ -1,19 +1,55 @@
 import "./write.css";
 import Topbar from "../../components/topbar/Topbar";
+import { useContext, useState } from "react";
+import { Context } from "../../context/Context";
+import axios from "axios";
 
 export default function Write() {
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [file, setFile] = useState(null);
+
+  const { user } = useContext(Context);
+
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+    const newPost = {
+      username: user.username,
+      title,
+      desc,
+    };
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+      try {
+        await axios.post("/api/upload", data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    try {
+      const res = await axios.post("/api/post", newPost);
+      window.location.replace("/post/" + res.data._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="write">
       <Topbar />
       <div className="writeContainer">
-        <div className="writeImgContainer">
-          <img
-            src="https://images.unsplash.com/photo-1551290470-554bf3a4fa80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-            alt=""
-            className="writeImg"
-          />
-        </div>
-        <form className="writeForm">
+        {file && (
+          <div className="writeImgContainer">
+            <img src={URL.createObjectURL(file)} alt="" className="writeImg" />
+          </div>
+        )}
+        <form className="writeForm" onSubmit={handelSubmit}>
           <div className="formGroup">
             <label htmlFor="file">
               <i className="fileIcon fa-solid fa-plus"></i>
@@ -22,6 +58,7 @@ export default function Write() {
                 type="file"
                 className="formGroupInput"
                 style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
             <input
@@ -29,6 +66,7 @@ export default function Write() {
               className="formGroupInput"
               placeholder="Title"
               autoFocus={true}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <textarea
@@ -37,6 +75,7 @@ export default function Write() {
             cols="30"
             rows="10"
             placeholder="Tell Your Story ..."
+            onChange={(e) => setDesc(e.target.value)}
           ></textarea>
           <button className="publishForm" type="submit">
             Publish

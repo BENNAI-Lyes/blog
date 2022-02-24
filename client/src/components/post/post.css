@@ -5,6 +5,8 @@
   width: 400px;
   padding: 15px;
   margin: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 10px;
 }
 .postImg {
   border-radius: 10px;
@@ -15,7 +17,7 @@
   text-align: center;
   font-size: 12px;
   font-weight: 600;
-  color: #999;
+  color: lightgreen;
   font-family: "Varela Round", sans-serif;
 }
 .postCat {
@@ -25,6 +27,7 @@
   font-size: 19px;
   font-weight: 600;
   font-family: "Josefin Sans", sans-serif;
+  cursor: pointer;
 }
 .postDate {
   font-size: 11px;

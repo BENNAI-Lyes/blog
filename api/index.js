@@ -15,7 +15,7 @@ const categoryRouts = require("./route/category");
 dotenv.config();
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "assets/images")));
+app.use("/images", express.static(path.join(__dirname, "assets/images")));
 
 app.use(morgan("common"));
 app.use(helmet());
@@ -39,11 +39,11 @@ app.use("/api/category", categoryRouts);
 // upload images to the server
 
 const storage = multer.diskStorage({
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
   destination: (req, file, cb) => {
     cb(null, "assets/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
   },
 });
 

@@ -1,51 +1,77 @@
 import "./singlePost.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../../context/Context";
 
 export default function SinglePost() {
+  const [post, setPost] = useState({});
+  const PF = "http://localhost:8000/images/";
+  const { user } = useContext(Context);
+  const postId = useParams().postId;
+
+  //fetch a single post
+  useEffect(() => {
+    try {
+      const getPost = async () => {
+        const res = await axios.get("/api/post/" + postId);
+        setPost(res.data);
+      };
+      getPost();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [postId]);
+
+  const handelDelete = async () => {
+    try {
+      await axios.delete("/api/post/" + postId, {
+        data: { username: user.username },
+      });
+      window.location.replace("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="singlePost">
       <Topbar />
       <div className="singlePostFeed">
         <div className="singlePostContent">
-          <img
-            className="singlePostImg"
-            src="https://images.unsplash.com/photo-1501747315-124a0eaca060?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGxhbnQlMjBwb3N0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
+          {post.img && (
+            <img className="singlePostImg" src={PF + post.img} alt="" />
+          )}
           <div className="singlePostTitleContainer">
-            <h2 className="singlePostTitle">Lorem ipsum dolor sit amet</h2>
-            <div className="singlePostIcons">
-              <i class="singlePostIcon fa-solid fa-pen-to-square"></i>
-              <i class="singlePostIcon fa-solid fa-trash-can"></i>
-            </div>
+            <h2 className="singlePostTitle"> {post.title} </h2>
+            {post.username === user.username && (
+              <div className="singlePostIcons">
+                <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
+                <i
+                  className="singlePostIcon fa-solid fa-trash-can"
+                  onClick={handelDelete}
+                ></i>
+              </div>
+            )}
           </div>
           <div className="singlePostInfo">
             <div className="singlePostInfoLeft">
-              <b>Author</b>: Lyes
+              <b>Author</b>:{" "}
+              <Link
+                to={`/?username=${post.username}`}
+                className="link"
+                style={{ cursor: "pointer" }}
+              >
+                {post.username}
+              </Link>
             </div>
-            <div className="singlePostInfoRight">1 day ago</div>
+            <div className="singlePostInfoRight">
+              {new Date(post.createdAt).toDateString()}{" "}
+            </div>
           </div>
-          <div className="singlePostText">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-            possimus aperiam est illum a nesciunt commodi provident ullam, non
-            iste expedita, id, sapiente doloribus? Ipsam explicabo quaerat odio
-            recusandae inventore cum corporis laboriosam repellendus quia,
-            aliquam sit rerum iure temporibus, porro autem doloremque ut
-            necessitatibus hic! A, laborum. Similique quisquam dolorum aperiam
-            eius. Laborum non illum eos, voluptatum blanditiis libero,
-            aspernatur accusantium, atque veritatis a voluptate quasi sunt cum
-            sed? Autem cupiditate vitae dolore nihil, harum tenetur eum sapiente
-            laboriosam impedit quo maxime perspiciatis provident. Temporibus
-            doloribus magni iusto eligendi quasi sunt est tenetur debitis
-            repudiandae aspernatur sequi, optio in. quisquam dolorum aperiam
-            eius. Laborum non illum eos, voluptatum blanditiis libero,
-            aspernatur accusantium, atque veritatis a voluptate quasi sunt cum
-            sed? Autem cupiditate vitae dolore nihil, harum tenetur eum sapiente
-            laboriosam impedit quo maxime perspiciatis provident. Temporibus
-            doloribus magni iusto eligendi quasi sunt est tenetur debitis
-            repudiandae aspernatur sequi, optio in.
-          </div>
+          <div className="singlePostText"> {post.desc} </div>
         </div>
         <Sidebar />
       </div>

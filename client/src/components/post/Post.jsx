@@ -1,38 +1,24 @@
 import "./post.css";
 import { Link } from "react-router-dom";
 
-export default function Post() {
+export default function Post({ post }) {
+  const PF = "http://localhost:8000/images/";
   return (
     <div className="post">
-      <Link className="link" to="/post/jhjh">
-        <img
-          src="https://images.unsplash.com/photo-1501747315-124a0eaca060?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGxhbnQlMjBwb3N0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-          alt=""
-          className="postImg"
-        />
-      </Link>
+      {post.img && <img src={PF + post.img} alt="" className="postImg" />}
+
       <div className="postCats">
-        <span className="postCat">Music</span>
-        <span className="postCat">Life</span>
+        {post.category.map((cat) => (
+          <Link to={`/?category=${cat}`} className="link postCat" key={cat}>
+            {cat}
+          </Link>
+        ))}
       </div>
-      <div className="postTitle">Lorem ipsum dolor sit amet</div>
-      <div className="postDate">5 Hour Ago</div>
-      <div className="postText">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-        odio ad reiciendis ipsam, voluptatem laboriosam quisquam ratione minima
-        rem impedit dolorum officiis eveniet ipsa incidunt nulla sapiente
-        provident totam. Provident hic deleniti inventore delectus odio
-        consequuntur quibusdam doloribus accusantium, doloremque corporis odit
-        ut laboriosam quas, eos ullam neque voluptas accusamus quos, eligendi
-        tenetur maiores sequi qui. Consequuntur asperiores possimus incidunt
-        nulla quis quaerat ipsum! Architecto id iste quis neque praesentium
-        culpa alias iusto harum fugiat eum perferendis adipisci similique
-        eveniet, earum maxime doloribus. Nesciunt alias corrupti doloremque
-        deleniti consectetur natus quas molestiae laborum modi aliquid est a
-        deserunt mollitia, accusamus fugiat, quia consequuntur tempore, nemo
-        dignissimos. Ipsum minima sit maxime laudantium error quasi aliquid eos
-        quis enim rerum quam deserunt inventore
-      </div>
+      <Link className="link" to={`post/${post._id}`}>
+        <div className="postTitle">{post.title}</div>
+      </Link>
+      <div className="postDate">{new Date(post.createdAt).toDateString()}</div>
+      <div className="postText">{post.desc}</div>
     </div>
   );
 }
