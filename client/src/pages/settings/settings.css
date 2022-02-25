@@ -105,3 +105,16 @@
   text-align: center;
   border-radius: 10px;
 }
+
+.success {
+  background-color: lightgreen;
+  color: #fff;
+  padding: 8px 10px;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  width: 390px;
+  margin: auto;
+  /* margin-top: 15px; */
+  border-radius: 7px;
+}

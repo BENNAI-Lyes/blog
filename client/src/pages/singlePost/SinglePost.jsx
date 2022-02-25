@@ -53,7 +53,7 @@ export default function SinglePost() {
         title: updatedTitle,
         desc: updatedDesc,
       });
-      window.location.reload();
+      setUpdatedMode(false);
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +81,7 @@ export default function SinglePost() {
                 autoFocus={true}
               />
             ) : (
-              <h2 className="singlePostTitle"> {post.title} </h2>
+              <h2 className="singlePostTitle"> {updatedTitle} </h2>
             )}
             {post.username === user.username && !updatedMode && (
               <div className="singlePostIcons">
@@ -110,11 +110,11 @@ export default function SinglePost() {
                 className="link"
                 style={{ cursor: "pointer" }}
               >
-                {post.username}
+                {user.username}
               </Link>
             </div>
             <div className="singlePostInfoRight">
-              {new Date(post.createdAt).toDateString()}{" "}
+              {new Date(post.createdAt).toDateString()}
             </div>
           </div>
           {updatedMode ? (
@@ -128,7 +128,7 @@ export default function SinglePost() {
               onChange={(e) => setUpdatedDesc(e.target.value)}
             ></textarea>
           ) : (
-            <div className="singlePostText"> {post.desc} </div>
+            <div className="singlePostText"> {updatedDesc} </div>
           )}
           {updatedMode && (
             <button className="updatePost" onClick={handelSaveUpdate}>

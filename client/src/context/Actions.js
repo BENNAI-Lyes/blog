@@ -13,3 +13,13 @@ export const LoginFailure = (error) => ({
 export const LogOut = () => ({
   type: "LOGOUT",
 });
+
+export const UpdateUserStart = () => ({ type: "UPDATE_START" });
+export const UpdateUserSuccess = (user) => ({
+  type: "UPDATE_SUCCESS",
+  payload: user,
+});
+export const UpdateUserFailure = (error) => ({
+  type: "UPDATE_FAILURE",
+  payload: error,
+});

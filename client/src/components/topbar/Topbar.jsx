@@ -5,6 +5,7 @@ import { Context } from "../../context/Context";
 
 export default function Topbar() {
   const { user, dispatch } = useContext(Context);
+  const PF = "http://localhost:8000/images/";
 
   const handelLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -51,7 +52,15 @@ export default function Topbar() {
       <div className="topbarRight">
         {user ? (
           <Link className="link" to="/settings">
-            <img src={user.profilePicture} alt="" className="topbarImg" />
+            <img
+              src={
+                user.profilePicture
+                  ? PF + user.profilePicture
+                  : PF + "noAvatar.webp"
+              }
+              alt=""
+              className="topbarImg"
+            />
           </Link>
         ) : (
           <ul className="topbarList">
